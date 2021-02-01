@@ -2,8 +2,7 @@ const User = require('../models/user');
 
 module.exports = async (req, res) => {
   try {
-  const username = req.body.username;
-  const password = req.body.password;
+  const { username, password } = req.body;
 
   if (!username || !password) return res.status(401).json({ message: 'É necessário usuário e senha para fazer login' });
 

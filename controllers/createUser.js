@@ -2,12 +2,13 @@ const Model = require('../models/user');
 
 module.exports = async (req, res) => {
   try {
-    const username = await Model.registerUser(
-      req.body.username,
-      req.body.password
-    );
-    if (!username) throw Error;
-    res.status(201).json({ message: 'Novo usuário', user: username });
+    const { username, password } = req.body;
+
+    const userData = await Model.registerUser(username, password);
+
+    if (!userData) throw Error;
+
+    res.status(201).json({ message: 'Novo usuário', userData });
   } catch (err) {
     res
       .status(500)
